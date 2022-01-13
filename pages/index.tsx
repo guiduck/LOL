@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import React from 'react';
+import Hero from '../src/components/Hero';
 
 // A empresa de telefonia Telzir, especializada em chamadas de longa distância nacional,
 // vai colocar um novo produto no mercado chamado FaleMais. Normalmente um cliente
@@ -22,15 +23,7 @@ import React from 'react';
 const Home: React.FC = () => {
   return (
     <div>
-      <Head>
-        <title>Home</title>
-      </Head>
-
-      <main >
-        <h1>
-          hello world
-        </h1>
-      </main>
+      <Hero />
     </div>
   )
 }

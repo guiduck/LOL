@@ -1,24 +1,42 @@
 import { Box, Button, Container, Flex, Heading, Radio, RadioGroup, Stack, Text, useColorModeValue } from '@chakra-ui/react';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useApi from '../../src/hooks/useApi';
 
 const simulator: React.FC = () => {
 
-  const [origin, setOrigin] = React.useState('11')
-  const [destiny, setDestiny] = React.useState('11')
+  const [origin, setOrigin] = useState('0')
+  const [destiny, setDestiny] = useState('011')
+
+  const [priceKey, setPriceKey] = useState(0)
+  const [price, setPrice] = useState(0)
 
   const { response: pricingData, error } = useApi('/origin')
-  console.log(pricingData)
 
   const pricing = (origin, destiny) => {
     //use selected origin and compare to array of pricingData to calculate spending
-    const destinyPrices = pricingData.filter(p => p == origin)
-    const price = destinyPrices.filter(p => p == destiny)
+    if (pricingData) {
+      const prices = pricingData.map(item => (item.destiny.map(v => Object.values(v))))
+      const keys = pricingData.map(item => (item.destiny.map(k => Object.keys(k))))
 
-    if (!price) {
+      console.log(prices, keys)
 
+      const key = keys[origin].map(k => k==destiny ? k : null)
+      setPriceKey(keys[origin].map((k, index) => k==destiny ? index : null))
+
+      if(priceKey) {
+        setPrice(prices[origin].map((p, index) => index == priceKey ? p : null))
+      }
+
+      if (price && key) {
+        console.log(key, price)
+      }
     }
+
   }
+
+  useEffect(() => {
+    pricing(origin, destiny)
+  }, [origin, destiny])
 
   return (
     <Container justifyContent='center' alignItems='center'>
@@ -39,10 +57,10 @@ const simulator: React.FC = () => {
           <Flex gap={20}>
             <RadioGroup onChange={setOrigin} value={origin}>
               <Stack direction='column'>
-                <Radio value='011'>011</Radio>
-                <Radio value='016'>016</Radio>
-                <Radio value='017'>017</Radio>
-                <Radio value='018'>018</Radio>
+                <Radio value='0'>011</Radio>
+                <Radio value='1'>016</Radio>
+                <Radio value='2'>017</Radio>
+                <Radio value='3'>018</Radio>
               </Stack>
             </RadioGroup>
             <RadioGroup onChange={setDestiny} value={destiny}>

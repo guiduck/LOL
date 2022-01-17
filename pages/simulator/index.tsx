@@ -5,7 +5,7 @@ import useApi from '../../src/hooks/useApi';
 const simulator: React.FC = () => {
 
   const [origin, setOrigin] = useState('0')
-  const [destiny, setDestiny] = useState('011')
+  const [destiny, setDestiny] = useState('0')
 
   const [priceKey, setPriceKey] = useState(0)
   const [price, setPrice] = useState(0)
@@ -15,27 +15,18 @@ const simulator: React.FC = () => {
   const pricing = (origin, destiny) => {
     //use selected origin and compare to array of pricingData to calculate spending
     if (pricingData) {
-      const prices = pricingData.map(item => (item.destiny.map(v => Object.values(v))))
+      const prices = pricingData.map(item => (item.destiny.map((v, index) => index == destiny ? Object.values(v) : null)))
       const keys = pricingData.map(item => (item.destiny.map(k => Object.keys(k))))
 
+      setPrice(prices[origin].find((p, index) => destiny == index ? p : null))
       console.log(prices, keys)
-
-      const key = keys[origin].map(k => k==destiny ? k : null)
-      setPriceKey(keys[origin].map((k, index) => k==destiny ? index : null))
-
-      if(priceKey) {
-        setPrice(prices[origin].map((p, index) => index == priceKey ? p : null))
-      }
-
-      if (price && key) {
-        console.log(key, price)
-      }
     }
-
   }
 
   useEffect(() => {
     pricing(origin, destiny)
+
+    console.log(price)
   }, [origin, destiny])
 
   return (
@@ -65,10 +56,10 @@ const simulator: React.FC = () => {
             </RadioGroup>
             <RadioGroup onChange={setDestiny} value={destiny}>
               <Stack direction='column'>
-                <Radio value='011'>011</Radio>
-                <Radio value='016'>016</Radio>
-                <Radio value='017'>017</Radio>
-                <Radio value='018'>018</Radio>
+                <Radio value='0'>011</Radio>
+                <Radio value='1'>016</Radio>
+                <Radio value='2'>017</Radio>
+                <Radio value='3'>018</Radio>
               </Stack>
             </RadioGroup>
           </Flex>

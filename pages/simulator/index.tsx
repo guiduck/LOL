@@ -1,4 +1,4 @@
-import { Box, Button, Container, Flex, Heading, Radio, RadioGroup, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import { Box, Button, Container, Flex, FormControl, FormLabel, Heading, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Radio, RadioGroup, Select, Stack, Text, useColorModeValue } from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
 import useApi from '../../src/hooks/useApi';
 
@@ -7,10 +7,61 @@ const simulator: React.FC = () => {
   const [origin, setOrigin] = useState('0')
   const [destiny, setDestiny] = useState('0')
 
+  const [userPlan, setUserPlan] = useState('30')
+  const [duration, setDuration] = useState('30')
+
   const [priceKey, setPriceKey] = useState(0)
   const [price, setPrice] = useState(0)
+  const [total, setTotal] = useState(0)
+  const [noPlan, setNoPlan] = useState(0)
 
   const { response: pricingData, error } = useApi('/origin')
+
+  const calculatePrice = (price, duration, userPlan) => {
+    if (duration <= 30 && userPlan == 30) {
+      if (price != null) {
+        setTotal(0)
+      } else {
+        setTotal(0)
+      }
+    } else if (duration > 30 && userPlan == 30) {
+      if (price != null) {
+        setTotal((price * (duration - 30) * 1.1))
+      } else {
+        setTotal(0)
+      }
+    } else if (duration <= 60 && userPlan == 60) {
+      if (price != null) {
+        setTotal(0)
+      } else {
+        setTotal(0)
+      }
+    } else if (duration > 60 && userPlan == 60) {
+      if (price != null) {
+        setTotal((price * (duration - 60) * 1.1))
+      } else {
+        setTotal(0)
+      }
+    } else if (duration <= 120 && userPlan == 120) {
+      if (price != null) {
+        setTotal(0)
+      } else {
+        setTotal(0)
+      }
+    } else if (duration > 120 && userPlan == 120) {
+      if (price != null) {
+        setTotal((price * (duration - 120) * 1.1))
+      } else {
+        setTotal(0)
+      }
+    } else if (userPlan == 0) {
+      if (price != null) {
+        setNoPlan(price * duration)
+      } else {
+        setNoPlan(0)
+      }
+    }
+  }
 
   const pricing = (origin, destiny) => {
     //use selected origin and compare to array of pricingData to calculate spending
@@ -18,15 +69,16 @@ const simulator: React.FC = () => {
       const prices = pricingData.map(item => (item.destiny.map((v, index) => index == destiny ? Object.values(v) : null)))
       const keys = pricingData.map(item => (item.destiny.map(k => Object.keys(k))))
 
-      setPrice(prices[origin].find((p, index) => destiny == index ? p : null))
-      console.log(prices, keys)
+      const p = (prices[origin].find((p, index) => destiny == index ? p : null))
+      setPrice(p[0])
     }
   }
 
   useEffect(() => {
     pricing(origin, destiny)
+    calculatePrice(price, duration, 0)
 
-    console.log(price)
+    console.log(price, userPlan, duration, total)
   }, [origin, destiny])
 
   return (
@@ -64,12 +116,55 @@ const simulator: React.FC = () => {
             </RadioGroup>
           </Flex>
 
+          <Flex direction='column'>
+            <Text
+              mt={1}
+              fontSize="sm"
+              color={useColorModeValue("gray.600", "gray.400")}
+            >
+              Selecione o tempo da ligação(em minutos) e o plano FaleMais desejado
+            </Text>
+            <FormControl>
+              <Select
+                id="plan"
+                name="plan"
+                autoComplete="plan"
+                placeholder="Select option"
+                mt={5}
+                focusBorderColor="brand.400"
+                shadow="sm"
+                size="sm"
+                w="full"
+                rounded="md"
+                value={userPlan}
+                onChange={(e) => setUserPlan(e.target.value)}
+              >
+                <option value={30}>FaleMais 30</option>
+                <option value={60}>FaleMais 60</option>
+                <option value={120}>FaleMais 120</option>
+              </Select>
+            </FormControl>
+            <NumberInput
+                onChange={(valueString) => setDuration(valueString)}
+                value={duration}
+                max={300}
+                mt={5}
+              >
+              <NumberInputField />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </Flex>
+
           <Flex pt={5}>
             <Button
               type="submit"
               colorScheme="teal"
               _focus={{ shadow: "" }}
               fontWeight="md"
+              onClick={() => calculatePrice(price, duration, userPlan)}
             >
               Test
             </Button>

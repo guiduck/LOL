@@ -2,6 +2,8 @@
 
 ### Overview
 
+https://lol-zeta.vercel.app
+
   This is a simple layout that calculates the cost of a call for given duration, location and selected plan. Made using NextJS, Typescript, eslint, prettier, Chakra-ui and Axios. The app asks for the desired location, gets the prices from an api and simulate a call.
 
 This project was bootstrapped with [Create Next App](https://nextjs.org/docs/api-reference/create-next-app).

@@ -1,8 +1,14 @@
 import { CheckIcon } from '@chakra-ui/icons';
 import { Box, chakra, Flex, HStack, Icon, useColorModeValue, VStack } from '@chakra-ui/react';
+import Router from 'next/router';
 import React from 'react';
 
 const Princing: React.FC = () => {
+
+  const goToSimulator = () => {
+    Router.push('/simulator')
+  }
+
   const Feature = (props) => {
     return (
       <Flex alignSelf="start" w="full">
@@ -56,7 +62,7 @@ const Princing: React.FC = () => {
               shadow="xl"
             >
               <chakra.span fontSize="3xl" fontWeight="bold">
-                Hobby
+                FaleMais 30
               </chakra.span>
               <HStack spacing={3}>
                 <chakra.span
@@ -64,14 +70,14 @@ const Princing: React.FC = () => {
                   fontSize="6xl"
                   textShadow="2px 0 currentcolor"
                 >
-                  $79
+                  R$ XX
                 </chakra.span>
                 <chakra.span
                   alignSelf="center"
                   fontSize="3xl"
-                  color={useColorModeValue("gray.400", "gray.800")}
+                  color={useColorModeValue("gray.400", "gray.400")}
                 >
-                  /month
+                  /mês
                 </chakra.span>
               </HStack>
             </VStack>
@@ -89,9 +95,8 @@ const Princing: React.FC = () => {
                 direction="column"
                 alignItems="start"
               >
-                <Feature>Suppression Management</Feature>
-                <Feature>Email Tracking and Analytics </Feature>
-                <Feature>99.99% Guaranteed Uptime SLA</Feature>
+                <Feature>30 minutos grátis</Feature>
+                <Feature>todas as regiões </Feature>
               </VStack>
               <Box
                 w="full"
@@ -116,8 +121,9 @@ const Princing: React.FC = () => {
                     bg: useColorModeValue("brand.50", "gray.700"),
                   }}
                   cursor="pointer"
+                  onClick={goToSimulator}
                 >
-                  Start your trial{" "}
+                  Simular ligação{" "}
                 </chakra.a>
               </Box>
             </VStack>
@@ -141,8 +147,13 @@ const Princing: React.FC = () => {
               w="full"
               shadow="xl"
             >
-              <chakra.span fontSize="3xl" fontWeight="bold">
-                Growth
+              <chakra.span
+                fontSize="5xl"
+                display={{ base: "block", lg: "inline" }}
+                bgClip="text"
+                bgGradient="linear(to-r, green.400,purple.500)"
+                fontWeight="extrabold">
+                FaleMais 60
               </chakra.span>
               <HStack spacing={3}>
                 <chakra.span
@@ -150,14 +161,14 @@ const Princing: React.FC = () => {
                   fontSize="6xl"
                   textShadow="2px 0 currentcolor"
                 >
-                  $149
+                  R$ XX
                 </chakra.span>
                 <chakra.span
                   alignSelf="center"
                   fontSize="3xl"
-                  color={useColorModeValue("gray.400", "gray.800")}
+                  color={useColorModeValue("gray.400", "gray.300")}
                 >
-                  /month
+                  /mês
                 </chakra.span>
               </HStack>
             </VStack>
@@ -175,11 +186,8 @@ const Princing: React.FC = () => {
                 direction="column"
                 alignItems="start"
               >
-                <Feature>Suppression Management</Feature>
-                <Feature>Email Tracking and Analytics </Feature>
-                <Feature>99.99% Guaranteed Uptime SLA</Feature>
-                <Feature>1,000 Email Address Validations</Feature>
-                <Feature>Limited 24/7 Ticket Support</Feature>
+                <Feature>60 minutos grátis</Feature>
+                <Feature>todas as regiões </Feature>
               </VStack>
               <Box
                 display="inline-flex"
@@ -192,19 +200,21 @@ const Princing: React.FC = () => {
                   display="inline-flex"
                   alignItems="center"
                   justifyContent="center"
+                  mt={10}
                   px={5}
                   py={3}
                   border="solid transparent"
                   fontWeight="bold"
                   rounded="md"
-                  color={useColorModeValue("white", "white")}
-                  bg={useColorModeValue("brand.600", "brand.500")}
+                  color={useColorModeValue("brand.600", "gray.100")}
+                  bg={useColorModeValue("white", "gray.600")}
                   _hover={{
-                    bg: useColorModeValue("brand.700", "brand.600"),
+                    bg: useColorModeValue("brand.200", "gray.700"),
                   }}
                   cursor="pointer"
+                  onClick={goToSimulator}
                 >
-                  Get started
+                  Simular ligação
                 </chakra.a>
               </Box>
             </VStack>
@@ -229,7 +239,7 @@ const Princing: React.FC = () => {
               shadow="xl"
             >
               <chakra.span fontSize="3xl" fontWeight="bold">
-                Scale
+                FaleMais 120
               </chakra.span>
               <HStack spacing={3}>
                 <chakra.span
@@ -237,14 +247,14 @@ const Princing: React.FC = () => {
                   fontSize="6xl"
                   textShadow="2px 0 currentcolor"
                 >
-                  $349
+                  R$ XX
                 </chakra.span>
                 <chakra.span
                   alignSelf="center"
                   fontSize="3xl"
-                  color={useColorModeValue("gray.400", "gray.800")}
+                  color={useColorModeValue("gray.400", "gray.400")}
                 >
-                  /month
+                  /mês
                 </chakra.span>
               </HStack>
             </VStack>
@@ -262,9 +272,8 @@ const Princing: React.FC = () => {
                 direction="column"
                 alignItems="start"
               >
-                <Feature>Suppression Management</Feature>
-                <Feature>Email Tracking and Analytics </Feature>
-                <Feature>99.99% Guaranteed Uptime SLA</Feature>
+                <Feature>120 minutos grátis</Feature>
+                <Feature>todas as regiões </Feature>
               </VStack>
               <Box
                 w="full"
@@ -289,8 +298,9 @@ const Princing: React.FC = () => {
                     bg: useColorModeValue("brand.50", "gray.700"),
                   }}
                   cursor="pointer"
+                  onClick={goToSimulator}
                 >
-                  Start your trial
+                  Simular ligação
                 </chakra.a>
               </Box>
             </VStack>

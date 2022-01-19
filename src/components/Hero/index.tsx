@@ -8,6 +8,10 @@ const Hero: React.FC = () => {
     Router.push('/simulator')
   }
 
+  const goToPrices = () => {
+    Router.push('/pricing')
+  }
+
   return (
     <Box px={8} py={24} mx="auto">
       <Box
@@ -82,6 +86,7 @@ const Hero: React.FC = () => {
             mb={{ base: 2, sm: 0 }}
             size="lg"
             cursor="pointer"
+            onClick={goToPrices}
           >
             Preços
             <Icon boxSize={4} ml={1} viewBox="0 0 20 20" fill="currentColor">

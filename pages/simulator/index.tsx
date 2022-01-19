@@ -1,5 +1,24 @@
-import { Box, Button, Container, Flex, FormControl, FormLabel, Heading, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper, Radio, RadioGroup, Select, Stack, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Container,
+  Flex,
+  FormControl,
+  Heading,
+  NumberDecrementStepper,
+  NumberIncrementStepper,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  Radio,
+  RadioGroup,
+  Select,
+  Stack,
+  Text,
+  useColorModeValue
+} from '@chakra-ui/react';
 import React, { useEffect, useState } from 'react';
+import Table from '../../src/components/Table';
 import useApi from '../../src/hooks/useApi';
 
 const simulator: React.FC = () => {
@@ -54,12 +73,10 @@ const simulator: React.FC = () => {
       } else {
         setTotal(0)
       }
-    } else if (userPlan == 0) {
-      if (price != null) {
-        setNoPlan(price * duration)
-      } else {
-        setNoPlan(0)
-      }
+    }
+    //get total price of noPlan
+    if (price && duration) {
+      setNoPlan(parseInt(duration) * price)
     }
   }
 
@@ -76,9 +93,8 @@ const simulator: React.FC = () => {
 
   useEffect(() => {
     pricing(origin, destiny)
-    calculatePrice(price, duration, 0)
 
-    console.log(price, userPlan, duration, total)
+    console.log(price, userPlan, duration, total, noPlan)
   }, [origin, destiny])
 
   return (
@@ -166,11 +182,13 @@ const simulator: React.FC = () => {
               fontWeight="md"
               onClick={() => calculatePrice(price, duration, userPlan)}
             >
-              Test
+              Calcular
             </Button>
           </Flex>
         </Flex>
+        <Table total={total} noPlan={noPlan} userPlan={userPlan} duration={duration} />
       </Box>
+
     </Container>
   )
 }

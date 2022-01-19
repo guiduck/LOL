@@ -42,9 +42,11 @@ const Table: React.FC<Props> = ({total, noPlan, userPlan, duration}) => {
               fontWeight="hairline"
               display="table-header-group"
             >
-              <span>Plan</span>
-              <span>Duration</span>
-              <chakra.span textAlign={{ md: "right" }}>Cost</chakra.span>
+              <Flex justifyContent='space-around'>
+                <span>Plano</span>
+                <span>Duração</span>
+                <chakra.span textAlign="right" ml={10} >Custo</chakra.span>
+              </Flex>
             </SimpleGrid>
 
           <SimpleGrid

@@ -200,9 +200,8 @@ const Princing: React.FC = () => {
                   display="inline-flex"
                   alignItems="center"
                   justifyContent="center"
-                  mt={10}
                   px={5}
-                  py={3}
+                  py={5}
                   border="solid transparent"
                   fontWeight="bold"
                   rounded="md"
